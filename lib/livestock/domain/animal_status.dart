@@ -5,12 +5,17 @@ enum AnimalStatus {
   observation('Observacion', {'observation'}),
   inTreatment('En tratamiento', {'in treatment', 'treatment', 'sick'}),
   sold('Vendido', {'sold'}),
+
+  /// Left the active herd but its record is kept; it does not count in the dashboard.
+  archived('Archivado', {'archived'}),
   unknown('', {});
 
   const AnimalStatus(this.apiValue, this._aliases);
 
   final String apiValue;
   final Set<String> _aliases;
+
+  bool get isArchived => this == archived;
 
   /// True for animals that need attention (not healthy and not sold).
   bool get needsAttention => this == observation || this == inTreatment;

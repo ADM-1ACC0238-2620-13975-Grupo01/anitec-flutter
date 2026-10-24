@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:anitec_flutter/core/network/api_client.dart';
 import 'package:anitec_flutter/core/network/app_error.dart';
 import 'package:dio/dio.dart';
@@ -53,6 +55,25 @@ void main() {
       ),
     );
     expect(unauthorizedCalls, 1);
+  });
+
+  test('a late 401 from an old session does not end the new one', () async {
+    final swapping = _TokenSwappingAdapter(() => token = 'new-session');
+    swapping.responses['GET herds'] = (401, null);
+    token = 'old-session';
+    final dio = createApiClient(
+      baseUrl: 'http://localhost/api/v1/',
+      readToken: () => token,
+      onUnauthorized: () => unauthorizedCalls++,
+      adapter: swapping,
+    );
+
+    await expectLater(
+      guardApi(() => dio.get<Object?>('herds')),
+      throwsA(isA<AppException>()),
+    );
+
+    expect(unauthorizedCalls, 0);
   });
 
   test(
@@ -115,4 +136,21 @@ void main() {
       );
     });
   });
+}
+
+/// Signs in again while the request is in flight, as happens when the user switches accounts quickly.
+class _TokenSwappingAdapter extends FakeAdapter {
+  _TokenSwappingAdapter(this._signInAgain) : super({});
+
+  final void Function() _signInAgain;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) {
+    _signInAgain();
+    return super.fetch(options, requestStream, cancelFuture);
+  }
 }

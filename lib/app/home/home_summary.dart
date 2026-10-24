@@ -30,7 +30,11 @@ class HomeData {
     required DateTime today,
   }) {
     final visibleHerds = LivestockScope.visibleHerds(userId, herds);
-    final visibleAnimals = LivestockScope.visibleAnimals(animals, visibleHerds);
+    // Archived animals are kept on the server but do not count in the herd, like in the Android app.
+    final visibleAnimals = LivestockScope.visibleAnimals(
+      animals,
+      visibleHerds,
+    ).where((animal) => !animal.isArchived).toList();
     return HomeData(
       herds: visibleHerds,
       animals: visibleAnimals,

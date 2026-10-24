@@ -31,10 +31,14 @@ Dio createApiClient({
         handler.next(options);
       },
       onError: (error, handler) {
-        final sentToken = error.requestOptions.headers.containsKey(
-          'Authorization',
-        );
-        if (error.response?.statusCode == 401 && sentToken) onUnauthorized();
+        // Only the session that sent the request can be ended by its 401: if the user signed in again
+        // while the request was in flight, the new session stays.
+        final sent = error.requestOptions.headers['Authorization'];
+        if (error.response?.statusCode == 401 &&
+            sent != null &&
+            sent == 'Bearer ${readToken()}') {
+          onUnauthorized();
+        }
         handler.next(error);
       },
     ),

@@ -25,6 +25,9 @@ class Animal {
   final int herdId;
 
   AnimalStatus get healthStatus => AnimalStatus.fromApi(status);
+
+  /// Archived animals are kept on the server but left out of the herd counters.
+  bool get isArchived => healthStatus.isArchived;
 }
 
 /// Client-side visibility rules for livestock data.
