@@ -20,6 +20,16 @@ flutter run --dart-define=API_BASE_URL=http://192.168.1.10:5191/api/v1/   # phys
 The first request to Render can take about a minute (free tier cold start); timeouts are 60 s.
 Debug builds allow cleartext HTTP (`android/app/src/debug/AndroidManifest.xml`); release builds are HTTPS only.
 
+## Release APK
+
+Copy `android/key.properties.example` to `android/key.properties` (git ignores it) and fill in the keystore data; it has the same format as `keystore.properties` of the native app, so the same file and the same keystore can be used. Without it the APK is signed with the debug key and Gradle prints a warning.
+
+```bash
+flutter build apk --release      # build/app/outputs/flutter-apk/app-release.apk
+```
+
+Raise the number after `+` in `version:` of `pubspec.yaml` before every new upload. The APK is distributed through Firebase App Distribution with the app `com.anitec.platform.flutter`; the steps (project, upload, testers, invite link) are in the README of `anitec-android`, section *Release build and distribution*.
+
 ## Checks
 
 ```bash

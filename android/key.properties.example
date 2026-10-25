@@ -1,0 +1,9 @@
+# Copy this file to key.properties (git ignores that one) and fill in your own values.
+# It uses the same format as keystore.properties of the native app, so the same file can be copied over.
+# Create the keystore outside the repository, for example:
+#   keytool -genkeypair -v -keystore C:/Users/<you>/anitec-release.jks -alias anitec -keyalg RSA -keysize 2048 -validity 10000
+# Keep a backup of the keystore and its passwords: without them an installed app cannot be updated.
+storeFile=C:/Users/<you>/anitec-release.jks
+storePassword=
+keyAlias=anitec
+keyPassword=
