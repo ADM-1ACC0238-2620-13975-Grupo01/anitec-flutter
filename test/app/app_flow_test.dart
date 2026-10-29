@@ -190,6 +190,9 @@ void main() {
 
     expect(find.text('Hola, Ana Pérez'), findsOneWidget);
     expect(find.text('Requieren atención'), findsOneWidget);
+    // The farm selector shows its current choice in the new language too.
+    expect(find.text('Todas las fincas'), findsOneWidget);
+    expect(find.text('All farms'), findsNothing);
     expect(container.read(languageControllerProvider), AppLanguage.spanish);
     expect((await SharedPreferences.getInstance()).getString('language'), 'es');
 
@@ -198,6 +201,7 @@ void main() {
     await tester.tap(find.text('English'));
     await tester.pumpAndSettle();
     expect(find.text('Hello, Ana Pérez'), findsOneWidget);
+    expect(find.text('All farms'), findsOneWidget);
   });
 
   testWidgets('the stored language is applied on launch', (tester) async {

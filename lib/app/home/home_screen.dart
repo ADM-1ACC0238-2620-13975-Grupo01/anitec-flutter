@@ -185,7 +185,11 @@ class _Dashboard extends StatelessWidget {
         ],
         if (data.herds.isNotEmpty) ...[
           DropdownMenu<int?>(
-            key: ValueKey(summary.selectedHerdId),
+            // The menu keeps the text of its choice, so it is rebuilt when the farm or the language changes.
+            key: ValueKey((
+              summary.selectedHerdId,
+              Localizations.localeOf(context).languageCode,
+            )),
             expandedInsets: EdgeInsets.zero,
             label: Text(l10n.homeFarmFilter),
             leadingIcon: const Icon(Icons.home_work_outlined),
