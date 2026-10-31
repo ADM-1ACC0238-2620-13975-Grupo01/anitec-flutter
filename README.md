@@ -30,7 +30,10 @@ flutter build apk --release      # build/app/outputs/flutter-apk/app-release.apk
 
 Raise the number after `+` in `version:` of `pubspec.yaml` before every new upload. The APK is distributed through Firebase App Distribution with the app `com.anitec.platform.flutter`; the steps (project, upload, testers, invite link) are in the README of `anitec-android`, section *Release build and distribution*.
 
-Public invite link of this app: <https://appdistribution.firebase.dev/i/862507cca1d4abc6>
+Public invite links of the group `Equipo AniTec` (shared with the native app; Firebase lists the same links from both apps):
+
+- <https://appdistribution.firebase.dev/i/417dc4e6d8ae3e32>
+- <https://appdistribution.firebase.dev/i/862507cca1d4abc6>
 
 ## Checks
 

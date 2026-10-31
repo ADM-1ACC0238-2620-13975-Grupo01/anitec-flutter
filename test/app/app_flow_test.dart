@@ -185,7 +185,9 @@ void main() {
 
     await tester.tap(find.byTooltip('Language'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Español'));
+    await tester.tap(
+      find.widgetWithText(CheckedPopupMenuItem<AppLanguage>, 'Español'),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Hola, Ana Pérez'), findsOneWidget);
@@ -198,7 +200,9 @@ void main() {
 
     await tester.tap(find.byTooltip('Idioma'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('English'));
+    await tester.tap(
+      find.widgetWithText(CheckedPopupMenuItem<AppLanguage>, 'English'),
+    );
     await tester.pumpAndSettle();
     expect(find.text('Hello, Ana Pérez'), findsOneWidget);
     expect(find.text('All farms'), findsOneWidget);
