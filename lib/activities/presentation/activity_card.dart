@@ -18,6 +18,7 @@ String activityTypeLabel(AppLocalizations l10n, String type) => switch (type) {
   _ => type,
 };
 
+/// Localized priority; unknown values are shown as they are.
 String activityPriorityLabel(AppLocalizations l10n, String priority) =>
     switch (priority) {
       ActivityPriorities.high => l10n.activityPriorityHigh,
@@ -26,6 +27,7 @@ String activityPriorityLabel(AppLocalizations l10n, String priority) =>
       _ => priority,
     };
 
+/// Localized status; unknown values are shown as they are.
 String activityStatusLabel(AppLocalizations l10n, String status) =>
     switch (status) {
       ActivityStatuses.pending => l10n.activityStatusPending,
