@@ -4,11 +4,14 @@ import '../../core/network/app_error.dart';
 import '../../core/session/user_session.dart';
 import '../domain/auth_repository.dart';
 
+/// [AuthRepository] backed by the `authentication` endpoints of the API.
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this._dio);
 
   final Dio _dio;
 
+  /// Signs in and builds the [UserSession]. Fails with [UnknownError] for a role the app does not know,
+  /// and falls back to the username when the account has no full name.
   @override
   Future<UserSession> signIn(String username, String password) =>
       guardApi(() async {
