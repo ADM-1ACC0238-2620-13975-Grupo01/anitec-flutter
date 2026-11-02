@@ -20,6 +20,27 @@ flutter run --dart-define=API_BASE_URL=http://192.168.1.10:5191/api/v1/   # phys
 The first request to Render can take about a minute (free tier cold start); timeouts are 60 s.
 Debug builds allow cleartext HTTP (`android/app/src/debug/AndroidManifest.xml`); release builds are HTTPS only.
 
+### Local backend or hosted backend
+
+The backend depends on the build mode: `debug` (the default of `flutter run`) uses the local backend and `release` uses the hosted one on Render. In Android Studio or VS Code the mode is chosen in the run configuration (Android Studio: **Run > Edit Configurations > Additional run args**, add `--release`; VS Code: **Run and Debug**, launch configuration with `"flutterMode": "release"`). From the terminal:
+
+```bash
+flutter run               # local backend
+flutter run --release     # hosted backend (Render)
+```
+
+Things to keep in mind:
+
+- **Local backend (`debug`).** Start the backend on your computer first (`dotnet run --project Anitec.Platform` in `anitec-backend`). The data comes from the local database. The emulator reaches your computer at `10.0.2.2`; a physical device needs `--dart-define=API_BASE_URL=http://<your-ip>:5191/api/v1/`.
+- **Hosted backend (`release`).** It needs no local setup and uses the deployed database. The first request can take about a minute (free tier cold start). The release build is HTTPS only and is signed with the key of `android/key.properties`.
+- **Same package, different signature.** Debug and release both install as `com.anitec.platform.flutter`, but debug is signed with the debug key and release with your own key. Installing one over the other fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Uninstall the app from the device first (long press on the icon, then Uninstall), or run:
+
+```bash
+adb uninstall com.anitec.platform.flutter
+```
+
+- **Other server in any mode.** `--dart-define=API_BASE_URL=...` overrides the URL in both modes.
+
 ## Release APK
 
 Copy `android/key.properties.example` to `android/key.properties` (git ignores it) and fill in the keystore data; it has the same format as `keystore.properties` of the native app, so the same file and the same keystore can be used. Without it the APK is signed with the debug key and Gradle prints a warning.
