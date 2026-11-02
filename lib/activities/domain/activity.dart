@@ -21,6 +21,7 @@ class Activity {
   final String priority;
   final String status;
 
+  /// Whether the activity is completed, ignoring case.
   bool get isCompleted =>
       status.toLowerCase() == ActivityStatuses.completed.toLowerCase();
 
@@ -42,6 +43,7 @@ class Activity {
       DateTime(value.year, value.month, value.day);
 }
 
+/// Activity types offered by the web; the API stores them as free text.
 abstract final class ActivityTypes {
   static const health = 'Sanitario';
   static const vetVisit = 'Visita veterinaria';
@@ -50,18 +52,21 @@ abstract final class ActivityTypes {
   static const reproductive = 'Reproductivo';
 }
 
+/// Priority values used by the web.
 abstract final class ActivityPriorities {
   static const high = 'Alta';
   static const medium = 'Media';
   static const low = 'Baja';
 }
 
+/// Status values used by the web.
 abstract final class ActivityStatuses {
   static const pending = 'Pendiente';
   static const scheduled = 'Programado';
   static const completed = 'Completado';
 }
 
+/// Client-side visibility rules for activities.
 abstract final class ActivityScope {
   /// The API returns every activity, so the client filters: a rancher sees the ones about them.
   static List<Activity> visibleToRancher(
