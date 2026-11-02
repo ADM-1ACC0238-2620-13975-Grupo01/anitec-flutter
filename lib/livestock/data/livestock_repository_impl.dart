@@ -5,6 +5,7 @@ import '../../core/network/json_reader.dart';
 import '../domain/livestock.dart';
 import '../domain/livestock_repository.dart';
 
+/// [LivestockRepository] backed by the `herds` and `animals` endpoints of the API.
 class LivestockRepositoryImpl implements LivestockRepository {
   const LivestockRepositoryImpl(this._dio);
 
@@ -23,12 +24,14 @@ class LivestockRepositoryImpl implements LivestockRepository {
   });
 }
 
+/// Reads the herd fields used by the dashboard.
 Herd _herdFromJson(Map<String, dynamic> json) => Herd(
   id: json.intOf('id'),
   name: json.stringOf('name'),
   ownerId: json.intOf('ownerId'),
 );
 
+/// Reads the animal fields used by the dashboard.
 Animal _animalFromJson(Map<String, dynamic> json) => Animal(
   id: json.intOf('id'),
   name: json.stringOf('name'),
