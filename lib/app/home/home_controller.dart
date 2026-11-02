@@ -13,6 +13,7 @@ import 'home_summary.dart';
 /// Source of "today"; tests replace it.
 final clockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
+/// Dashboard state: the loaded data, the selected farm and the refresh status.
 class HomeState {
   const HomeState({
     this.data,
@@ -23,12 +24,15 @@ class HomeState {
 
   /// Null until the first load succeeds.
   final HomeData? data;
+
+  /// Farm shown on the dashboard; null shows all of them.
   final int? selectedHerdId;
   final bool refreshing;
 
   /// Why the last load failed; cleared when the next one starts.
   final AppError? error;
 
+  /// Counters and recent records for the selected farm; null until the data loads.
   HomeSummary? get summary {
     final loaded = data;
     if (loaded == null) return null;
@@ -52,6 +56,7 @@ class HomeState {
   );
 }
 
+/// Dashboard controller; disposed when the screen closes.
 final homeControllerProvider =
     NotifierProvider.autoDispose<HomeController, HomeState>(HomeController.new);
 
@@ -71,6 +76,8 @@ class HomeController extends Notifier<HomeState> {
     return const HomeState(refreshing: true);
   }
 
+  /// Loads herds, animals, health events and activities in parallel and keeps the user's own data.
+  /// A refresh that is already running is not started again.
   Future<void> refresh() async {
     if (!ref.mounted || _inFlight) return;
     _inFlight = true;
@@ -102,6 +109,7 @@ class HomeController extends Notifier<HomeState> {
     }
   }
 
+  /// Shows one farm on the dashboard, or all of them when [herdId] is null.
   void onHerdSelected(int? herdId) => state = herdId == null
       ? state.copyWith(clearSelectedHerd: true)
       : state.copyWith(selectedHerdId: herdId);
