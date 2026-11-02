@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'session_store.dart';
 import 'user_session.dart';
 
+/// Whether a user is signed in; the router decides the screen from it.
 sealed class SessionState {
   const SessionState();
 }
@@ -12,6 +13,7 @@ final class SessionLoading extends SessionState {
   const SessionLoading();
 }
 
+/// Nobody is signed in.
 final class SignedOut extends SessionState {
   /// True when a 401 ended the previous session, so the sign-in screen can say why.
   const SignedOut({this.expired = false});
@@ -19,19 +21,23 @@ final class SignedOut extends SessionState {
   final bool expired;
 }
 
+/// A user is signed in with [session].
 final class SignedIn extends SessionState {
   const SignedIn(this.session);
 
   final UserSession session;
 }
 
+/// Secure storage where the session survives app restarts.
 final sessionStoreProvider = Provider<SessionStore>(
   (ref) => SecureSessionStore(),
 );
 
+/// Session of the app user.
 final sessionControllerProvider =
     NotifierProvider<SessionController, SessionState>(SessionController.new);
 
+/// Restores the stored session at start-up and starts or ends it.
 class SessionController extends Notifier<SessionState> {
   @override
   SessionState build() {
@@ -51,11 +57,13 @@ class SessionController extends Notifier<SessionState> {
     state = session == null ? const SignedOut() : SignedIn(session);
   }
 
+  /// Saves the session and signs the user in.
   Future<void> start(UserSession session) async {
     await ref.read(sessionStoreProvider).save(session);
     state = SignedIn(session);
   }
 
+  /// Deletes the stored session and signs the user out.
   Future<void> signOut() async {
     await ref.read(sessionStoreProvider).clear();
     state = const SignedOut();
