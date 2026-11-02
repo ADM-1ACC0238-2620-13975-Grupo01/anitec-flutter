@@ -7,6 +7,7 @@ import '../iam/presentation/sign_in_screen.dart';
 import '../iam/presentation/terms_screen.dart';
 import 'home/home_screen.dart';
 
+/// Paths of the app screens.
 abstract final class Routes {
   static const splash = '/splash';
   static const signIn = '/sign-in';
@@ -26,6 +27,7 @@ String? redirectFor(SessionState session, String location) => switch (session) {
     location == Routes.signIn || location == Routes.splash ? Routes.home : null,
 };
 
+/// App router; it re-evaluates [redirectFor] every time the session changes.
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier<int>(0);
   ref.listen(sessionControllerProvider, (_, _) => refresh.value++);
