@@ -7,6 +7,7 @@ import '../core/i18n/locale_controller.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 
+/// Root widget: applies the AniTec theme, the chosen language and the session-aware router.
 class AniTecApp extends ConsumerWidget {
   const AniTecApp({super.key});
 
