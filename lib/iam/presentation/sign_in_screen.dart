@@ -9,6 +9,8 @@ import '../../core/session/session_controller.dart';
 import '../../l10n/app_localizations.dart';
 import 'sign_in_controller.dart';
 
+/// Sign-in screen for ranchers, with the language menu. It tells the user when the previous
+/// session expired and when a veterinarian account tries to sign in.
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
