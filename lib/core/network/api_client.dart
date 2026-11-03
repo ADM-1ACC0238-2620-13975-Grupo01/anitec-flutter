@@ -22,9 +22,11 @@ Dio createApiClient({
       headers: {'Accept': 'application/json'},
     ),
   );
+  // Tests pass a fake adapter instead of making real HTTP calls.
   if (adapter != null) dio.httpClientAdapter = adapter;
   dio.interceptors.add(
     InterceptorsWrapper(
+      // Adds the token of the current session to every request.
       onRequest: (options, handler) {
         final token = readToken();
         if (token != null) options.headers['Authorization'] = 'Bearer $token';
