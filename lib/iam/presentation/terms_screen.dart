@@ -11,6 +11,7 @@ class TermsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    // Title and body of each section, in reading order.
     final sections = [
       (l10n.termsSectionUseTitle, l10n.termsSectionUseBody),
       (l10n.termsSectionAccountTitle, l10n.termsSectionAccountBody),
