@@ -1,3 +1,5 @@
+// Feature context: animal health event domain data.
+
 /// A health record of one animal. Dates are ISO (`yyyy-MM-dd`).
 class HealthEvent {
   const HealthEvent({
