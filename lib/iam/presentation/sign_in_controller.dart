@@ -73,7 +73,7 @@ final signInControllerProvider =
 class SignInController extends Notifier<SignInState> {
   @override
   SignInState build() => const SignInState();
-
+  /// Updates the username field in the sign-in state and clears any existing authentication failures.
   void onUsernameChange(String value) =>
       state = state.copyWith(username: value, clearFailure: true);
 
