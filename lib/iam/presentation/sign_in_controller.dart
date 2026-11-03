@@ -76,7 +76,7 @@ class SignInController extends Notifier<SignInState> {
   /// Updates the username field in the sign-in state and clears any existing authentication failures.
   void onUsernameChange(String value) =>
       state = state.copyWith(username: value, clearFailure: true);
-
+  /// Updates the password field in the sign-in state and automatically clears any active failure state.
   void onPasswordChange(String value) =>
       state = state.copyWith(password: value, clearFailure: true);
 
