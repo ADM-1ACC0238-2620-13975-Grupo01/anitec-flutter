@@ -45,7 +45,8 @@ class SignInState {
 
   bool get usernameMissing => showFieldErrors && username.trim().isEmpty;
   bool get passwordMissing => showFieldErrors && password.isEmpty;
-
+  /// Creates a copy of this [SignInState] with the given fields replaced with new values.
+  /// Supports clearing optional errors using the [clearFailure] flag.
   SignInState copyWith({
     String? username,
     String? password,
