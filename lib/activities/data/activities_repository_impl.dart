@@ -1,3 +1,5 @@
+// Feature context: remote activity data access.
+
 import 'package:dio/dio.dart';
 
 import '../../core/network/app_error.dart';
