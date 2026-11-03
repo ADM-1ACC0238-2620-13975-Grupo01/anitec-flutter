@@ -20,7 +20,8 @@ class SignInScreen extends ConsumerStatefulWidget {
 /// State class for [SignInScreen] managing local UI state such as password visibility.
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   bool _passwordVisible = false;
-
+  /// Builds the sign-in screen UI, initializing localization, theme data,
+  /// controller states, session expiration checks, and validation error messages.
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
