@@ -1,3 +1,5 @@
+// Feature context: livestock data access contract.
+
 import 'livestock.dart';
 
 /// Reads livestock from the API. Failures surface as `AppException`.
