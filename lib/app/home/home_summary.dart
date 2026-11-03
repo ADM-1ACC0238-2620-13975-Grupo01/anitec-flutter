@@ -1,3 +1,5 @@
+// Feature context: aggregated data displayed on the home dashboard.
+
 import '../../activities/domain/activity.dart';
 import '../../livestock/domain/livestock.dart';
 import '../../sanitary/domain/health_event.dart';
