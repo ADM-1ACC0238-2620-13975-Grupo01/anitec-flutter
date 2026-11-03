@@ -146,7 +146,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       ),
     );
   }
-
+  /// Resolves a [SignInFailure] to its corresponding localized error message string.
   String _failureMessage(AppLocalizations l10n, SignInFailure failure) =>
       switch (failure) {
         InvalidCredentials() => l10n.authInvalidCredentials,
