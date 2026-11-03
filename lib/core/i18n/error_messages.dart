@@ -9,6 +9,7 @@ String appErrorMessage(AppLocalizations l10n, AppError error) =>
       ForbiddenError() => l10n.errorForbidden,
       NotFoundError() => l10n.errorNotFound,
       ConflictError() => l10n.errorConflict,
+      // Sign-in turns a 400 into its own wrong-credentials message; elsewhere it gets the generic text.
       ValidationError() => l10n.errorUnknown,
       ServerError() => l10n.errorServer,
       UnknownError() => l10n.errorUnknown,
