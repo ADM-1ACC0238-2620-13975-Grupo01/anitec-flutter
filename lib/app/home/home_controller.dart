@@ -1,3 +1,5 @@
+// Feature context: home state coordination across modules.
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../activities/activities_providers.dart';
