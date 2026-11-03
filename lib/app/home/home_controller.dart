@@ -38,7 +38,8 @@ class HomeState {
     if (loaded == null) return null;
     return HomeSummary.of(loaded, selectedHerdId: selectedHerdId);
   }
-
+  /// Creates a copy of this [HomeState] with the given fields replaced with new values.
+  /// Supports clearing optional fields like [selectedHerdId] and [error] using explicit flags.
   HomeState copyWith({
     HomeData? data,
     int? selectedHerdId,
