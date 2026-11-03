@@ -17,7 +17,8 @@ class LivestockRepositoryImpl implements LivestockRepository {
     final response = await _dio.get<Object?>('herds');
     return jsonList(response.data).map(_herdFromJson).toList();
   });
-
+  /// Fetches the list of animals from the remote API, guarding against network errors
+  /// and mapping the JSON response list to domain [Animal] entities.
   @override
   Future<List<Animal>> fetchAnimals() => guardApi(() async {
     final response = await _dio.get<Object?>('animals');
