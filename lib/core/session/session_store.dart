@@ -37,7 +37,8 @@ class SecureSessionStore implements SessionStore {
       return null;
     }
   }
-
+  /// Persists the given [UserSession] securely by encoding it to a JSON string
+  /// and storing it using the underlying storage mechanism.
   @override
   Future<void> save(UserSession session) =>
       _storage.write(key: _key, value: jsonEncode(session.toJson()));
