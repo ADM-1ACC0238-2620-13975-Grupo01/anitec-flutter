@@ -16,6 +16,7 @@ class LanguageMenu extends ConsumerWidget {
       tooltip: l10n.languageLabel,
       icon: const Icon(Icons.translate),
       initialValue: current,
+      // Saves the choice, so the app opens in this language next time.
       onSelected: ref.read(languageControllerProvider.notifier).select,
       itemBuilder: (context) => [
         for (final language in AppLanguage.values)
