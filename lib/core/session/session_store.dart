@@ -6,10 +6,13 @@ import 'user_session.dart';
 
 /// Persists the signed-in session across launches.
 abstract interface class SessionStore {
+  /// Saved session, or null when there is none.
   Future<UserSession?> read();
 
+  /// Saves [session], replacing any previous one.
   Future<void> save(UserSession session);
 
+  /// Deletes the saved session, for example on sign-out.
   Future<void> clear();
 }
 
