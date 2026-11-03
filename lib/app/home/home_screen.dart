@@ -140,6 +140,7 @@ class _Placeholder extends StatelessWidget {
   }
 }
 
+/// Dashboard content once data is loaded. A failed refresh shows a banner over the last data.
 class _Dashboard extends StatelessWidget {
   const _Dashboard({
     required this.session,
