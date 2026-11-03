@@ -17,10 +17,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get commonLoading => 'Cargando…';
-
+  /// Localized translation getter for the "Show password" action label.
   @override
   String get commonShowPassword => 'Mostrar contraseña';
-
+  /// Localized translation getter for the "Hide password" action label.
   @override
   String get commonHidePassword => 'Ocultar contraseña';
 
