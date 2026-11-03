@@ -42,7 +42,8 @@ class SecureSessionStore implements SessionStore {
   @override
   Future<void> save(UserSession session) =>
       _storage.write(key: _key, value: jsonEncode(session.toJson()));
-
+  /// Clears the stored user session data from secure local storage.
+  /// Silently catches exceptions if the underlying keystore or storage mechanism is unavailable.
   @override
   Future<void> clear() async {
     try {
