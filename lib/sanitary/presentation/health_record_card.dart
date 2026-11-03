@@ -28,7 +28,9 @@ class HealthRecordCard extends StatelessWidget {
   final HealthEvent event;
   /// Name of the animal; the animal id is shown when empty.
   final String animalName;
-
+  /// Builds the UI representation for an individual health record card, displaying
+  /// animal identification, event dates, status tags, and conditionally included details
+  /// such as diagnosis, treatment, and follow-up schedules.
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
