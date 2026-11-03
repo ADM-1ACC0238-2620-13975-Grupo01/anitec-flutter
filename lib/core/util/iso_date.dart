@@ -2,6 +2,7 @@
 DateTime? parseApiDay(String value) {
   final parsed = DateTime.tryParse(value);
   if (parsed == null) return null;
+  // Drop the time so days can be compared directly.
   return DateTime(parsed.year, parsed.month, parsed.day);
 }
 
