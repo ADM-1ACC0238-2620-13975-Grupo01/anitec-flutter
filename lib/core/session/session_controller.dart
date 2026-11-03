@@ -1,3 +1,5 @@
+// Feature context: authenticated session lifecycle.
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'session_store.dart';
