@@ -47,6 +47,7 @@ class HomeData {
   }
 }
 
+/// A health record together with the name of its animal.
 class RecentRecord {
   const RecentRecord(this.event, this.animalName);
 
@@ -69,7 +70,9 @@ class HomeSummary {
 
   /// Null for "all farms". A selection that is no longer among the herds falls back to null.
   final int? selectedHerdId;
+  /// Active animals in the selected farm or in all farms.
   final int animalCount;
+  /// Animals in observation or in treatment.
   final int attentionCount;
   final int recordCount;
   final int followUpCount;
@@ -81,6 +84,7 @@ class HomeSummary {
   /// Four most recent health records, newest first.
   final List<RecentRecord> recent;
 
+  /// Builds the dashboard numbers from [data], limited to [selectedHerdId] when it is one of the herds.
   factory HomeSummary.of(HomeData data, {int? selectedHerdId}) {
     final selected = data.herds.any((herd) => herd.id == selectedHerdId)
         ? selectedHerdId
