@@ -39,6 +39,7 @@ const _colorScheme = ColorScheme(
   scrim: AniTecColors.ink,
 );
 
+/// Material 3 theme of the app: brand colors, text styles and the shared corner radius.
 ThemeData buildAniTecTheme() {
   const shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(aniTecRadius)),
