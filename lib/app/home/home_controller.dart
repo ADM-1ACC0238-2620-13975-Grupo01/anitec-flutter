@@ -69,6 +69,7 @@ class HomeController extends Notifier<HomeState> {
   @override
   HomeState build() {
     final session = ref.read(sessionControllerProvider);
+    // Extrae el identificador de usuario desde la sesión actual o asigna un valor por defecto si no ha iniciado sesión.
     _userId = switch (session) {
       SignedIn(:final session) => session.userId,
       _ => -1,
