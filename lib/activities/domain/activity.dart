@@ -1,3 +1,5 @@
+// Feature context: scheduled activity domain data.
+
 import '../../core/util/iso_date.dart';
 
 /// A scheduled farm task. `ownerId` is the rancher it concerns. Dates are ISO (`yyyy-MM-dd`);
