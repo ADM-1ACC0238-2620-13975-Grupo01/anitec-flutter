@@ -1,3 +1,5 @@
+// Maintenance context: shared API client responsibilities.
+
 import 'package:dio/dio.dart';
 
 /// Builds the [Dio] used by every API repository.
