@@ -1,3 +1,5 @@
+// Feature context: core livestock domain entities.
+
 import 'animal_status.dart';
 
 /// A farm (the web UI calls it "Finca"). It groups corrals and animals.
