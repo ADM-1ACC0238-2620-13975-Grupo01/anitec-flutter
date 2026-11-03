@@ -7,6 +7,7 @@ enum UserRole {
 
   final String apiValue;
 
+  /// Role for an API value, ignoring case; null when it is not a known role.
   static UserRole? fromApi(String? value) {
     for (final role in values) {
       if (role.apiValue.toLowerCase() == value?.toLowerCase()) return role;
@@ -15,6 +16,7 @@ enum UserRole {
   }
 }
 
+/// Signed-in user and the token sent with each request.
 class UserSession {
   const UserSession({
     required this.userId,
@@ -25,6 +27,7 @@ class UserSession {
     this.email,
   });
 
+  /// Restores a session saved with [toJson].
   factory UserSession.fromJson(Map<String, dynamic> json) => UserSession(
     userId: (json['userId'] as num).toInt(),
     username: json['username'] as String,
@@ -41,6 +44,7 @@ class UserSession {
   final String token;
   final String? email;
 
+  /// JSON form used to save the session.
   Map<String, dynamic> toJson() => {
     'userId': userId,
     'username': username,
