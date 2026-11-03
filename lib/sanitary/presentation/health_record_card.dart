@@ -1,3 +1,5 @@
+// Feature context: health record summary presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
