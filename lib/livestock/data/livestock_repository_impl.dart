@@ -10,7 +10,8 @@ class LivestockRepositoryImpl implements LivestockRepository {
   const LivestockRepositoryImpl(this._dio);
 
   final Dio _dio;
-
+  /// Fetches the list of herds from the remote API, guarding against network errors
+  /// and mapping the JSON response list to domain [Herd] entities.
   @override
   Future<List<Herd>> fetchHerds() => guardApi(() async {
     final response = await _dio.get<Object?>('herds');
