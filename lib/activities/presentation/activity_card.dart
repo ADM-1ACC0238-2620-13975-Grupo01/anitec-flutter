@@ -1,3 +1,5 @@
+// Feature context: scheduled activity card presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
