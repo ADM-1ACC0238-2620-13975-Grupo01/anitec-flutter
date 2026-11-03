@@ -1,3 +1,5 @@
+// Feature context: supported animal lifecycle statuses.
+
 /// Health/commercial status of an animal. `apiValue` is what the web client sends; `aliases` are the
 /// English values found in the backend seed data, so both are understood.
 enum AnimalStatus {
