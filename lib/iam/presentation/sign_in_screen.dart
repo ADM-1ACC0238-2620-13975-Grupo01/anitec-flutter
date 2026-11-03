@@ -17,7 +17,7 @@ class SignInScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
-
+/// State class for [SignInScreen] managing local UI state such as password visibility.
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   bool _passwordVisible = false;
 
