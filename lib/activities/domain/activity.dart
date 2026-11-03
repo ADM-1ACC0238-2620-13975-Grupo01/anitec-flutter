@@ -38,7 +38,7 @@ class Activity {
     final day = parseApiDay(date);
     return day != null && day.isBefore(_dayOf(today));
   }
-
+  /// Strips the time component from a [DateTime], returning a new instance set to midnight (00:00:00) of that day.
   static DateTime _dayOf(DateTime value) =>
       DateTime(value.year, value.month, value.day);
 }
