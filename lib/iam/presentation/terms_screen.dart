@@ -1,3 +1,5 @@
+// Documentation context: terms and conditions presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
