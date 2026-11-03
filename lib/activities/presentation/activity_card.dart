@@ -54,6 +54,7 @@ class ActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final date = displayApiDay(activity.date);
+    // Construye la tarjeta de registro con los detalles y la etiqueta de prioridad de la actividad.
     return RecordCard(
       title: activity.title,
       kicker: activity.isOverdue(today)
