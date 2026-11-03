@@ -1,3 +1,5 @@
+// Feature context: remote sanitary record synchronization.
+
 import 'package:dio/dio.dart';
 
 import '../../core/network/app_error.dart';
