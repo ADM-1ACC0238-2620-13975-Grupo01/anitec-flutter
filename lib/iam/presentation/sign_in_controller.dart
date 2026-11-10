@@ -1,3 +1,5 @@
+// Feature context: sign-in state and authentication requests.
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/network/app_error.dart';
@@ -5,10 +7,12 @@ import '../../core/session/session_controller.dart';
 import '../../core/session/user_session.dart';
 import '../iam_providers.dart';
 
+/// Why the last sign-in attempt failed.
 sealed class SignInFailure {
   const SignInFailure();
 }
 
+/// Wrong username or password.
 final class InvalidCredentials extends SignInFailure {
   const InvalidCredentials();
 }
@@ -18,12 +22,14 @@ final class VeterinarianNotSupported extends SignInFailure {
   const VeterinarianNotSupported();
 }
 
+/// The request failed for another reason, such as no connection or a server error.
 final class RequestFailed extends SignInFailure {
   const RequestFailed(this.error);
 
   final AppError error;
 }
 
+/// Sign-in form state. Field errors show only after a submit attempt.
 class SignInState {
   const SignInState({
     this.username = '',
@@ -41,7 +47,8 @@ class SignInState {
 
   bool get usernameMissing => showFieldErrors && username.trim().isEmpty;
   bool get passwordMissing => showFieldErrors && password.isEmpty;
-
+  /// Creates a copy of this [SignInState] with the given fields replaced with new values.
+  /// Supports clearing optional errors using the [clearFailure] flag.
   SignInState copyWith({
     String? username,
     String? password,
@@ -58,21 +65,24 @@ class SignInState {
   );
 }
 
+/// Sign-in form controller; disposed when the screen closes.
 final signInControllerProvider =
     NotifierProvider.autoDispose<SignInController, SignInState>(
       SignInController.new,
     );
 
+/// Holds the sign-in form and starts the session of a rancher.
 class SignInController extends Notifier<SignInState> {
   @override
   SignInState build() => const SignInState();
-
+  /// Updates the username field in the sign-in state and clears any existing authentication failures.
   void onUsernameChange(String value) =>
       state = state.copyWith(username: value, clearFailure: true);
-
+  /// Updates the password field in the sign-in state and automatically clears any active failure state.
   void onPasswordChange(String value) =>
       state = state.copyWith(password: value, clearFailure: true);
 
+  /// Validates the fields and signs in; only rancher accounts start a session.
   Future<void> submit() async {
     final current = state;
     if (current.loading) return;

@@ -12,6 +12,7 @@ class AniTecPanel extends StatelessWidget {
   });
 
   final Widget child;
+  /// Space between the border and [child].
   final EdgeInsetsGeometry padding;
 
   @override
@@ -94,7 +95,9 @@ class MetricCard extends StatelessWidget {
   final String label;
   final String value;
   final IconData icon;
+  /// Optional small text under the value.
   final String? caption;
+  /// Color of the value; the theme's tertiary color when null.
   final Color? valueColor;
 
   @override
@@ -137,6 +140,7 @@ class RecordCard extends StatelessWidget {
   });
 
   final String title;
+  /// Short line under the title, such as a date.
   final String kicker;
   final Widget trailing;
   final List<(String, String)> details;

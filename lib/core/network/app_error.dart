@@ -41,6 +41,7 @@ final class ValidationError extends AppError {
 final class ServerError extends AppError {
   const ServerError(this.code);
 
+  /// HTTP status code returned by the server.
   final int code;
 }
 
@@ -48,6 +49,7 @@ final class ServerError extends AppError {
 final class UnknownError extends AppError {
   const UnknownError([this.message]);
 
+  /// Technical detail for logs; never shown to the user.
   final String? message;
 }
 
@@ -74,6 +76,7 @@ Future<T> guardApi<T>(Future<T> Function() block) async {
   }
 }
 
+/// Maps a Dio failure to an [AppError]: transport problems first, then the HTTP status.
 AppError _fromDio(DioException e) {
   final status = e.response?.statusCode;
   if (status == null) {

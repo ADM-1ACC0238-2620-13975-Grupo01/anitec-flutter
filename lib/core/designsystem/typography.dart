@@ -14,6 +14,7 @@ TextStyle _style(
   letterSpacing: letterSpacing,
 );
 
+/// Text styles of the app theme: size, weight and line height match the Android app.
 final TextTheme aniTecTextTheme = TextTheme(
   displayMedium: _style(38, FontWeight.w800, 40),
   headlineMedium: _style(28, FontWeight.w700, 34),

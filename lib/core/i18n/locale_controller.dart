@@ -12,6 +12,7 @@ enum AppLanguage {
   final String code;
   final Locale locale;
 
+  /// Language for a stored code; English when nothing was stored.
   static AppLanguage fromCode(String? code) => values.firstWhere(
     (language) => language.code == code,
     orElse: () => english,
@@ -23,6 +24,7 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
   (ref) => throw UnimplementedError('sharedPreferencesProvider not overridden'),
 );
 
+/// Current UI language; widgets rebuild when it changes.
 final languageControllerProvider =
     NotifierProvider<LanguageController, AppLanguage>(LanguageController.new);
 
@@ -35,6 +37,7 @@ class LanguageController extends Notifier<AppLanguage> {
   AppLanguage build() =>
       AppLanguage.fromCode(ref.read(sharedPreferencesProvider).getString(_key));
 
+  /// Switches the UI language and stores the choice.
   Future<void> select(AppLanguage language) async {
     state = language;
     await ref.read(sharedPreferencesProvider).setString(_key, language.code);

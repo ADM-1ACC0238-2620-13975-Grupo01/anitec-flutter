@@ -1,3 +1,5 @@
+// Feature context: sign-in form and authentication feedback.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,16 +11,19 @@ import '../../core/session/session_controller.dart';
 import '../../l10n/app_localizations.dart';
 import 'sign_in_controller.dart';
 
+/// Sign-in screen for ranchers, with the language menu. It tells the user when the previous
+/// session expired and when a veterinarian account tries to sign in.
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
   @override
   ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
-
+/// State class for [SignInScreen] managing local UI state such as password visibility.
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   bool _passwordVisible = false;
-
+  /// Builds the sign-in screen UI, initializing localization, theme data,
+  /// controller states, session expiration checks, and validation error messages.
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -143,7 +148,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       ),
     );
   }
-
+  /// Resolves a [SignInFailure] to its corresponding localized error message string.
   String _failureMessage(AppLocalizations l10n, SignInFailure failure) =>
       switch (failure) {
         InvalidCredentials() => l10n.authInvalidCredentials,

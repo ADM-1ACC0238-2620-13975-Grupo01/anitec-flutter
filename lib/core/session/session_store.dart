@@ -6,10 +6,13 @@ import 'user_session.dart';
 
 /// Persists the signed-in session across launches.
 abstract interface class SessionStore {
+  /// Saved session, or null when there is none.
   Future<UserSession?> read();
 
+  /// Saves [session], replacing any previous one.
   Future<void> save(UserSession session);
 
+  /// Deletes the saved session, for example on sign-out.
   Future<void> clear();
 }
 
@@ -34,11 +37,13 @@ class SecureSessionStore implements SessionStore {
       return null;
     }
   }
-
+  /// Persists the given [UserSession] securely by encoding it to a JSON string
+  /// and storing it using the underlying storage mechanism.
   @override
   Future<void> save(UserSession session) =>
       _storage.write(key: _key, value: jsonEncode(session.toJson()));
-
+  /// Clears the stored user session data from secure local storage.
+  /// Silently catches exceptions if the underlying keystore or storage mechanism is unavailable.
   @override
   Future<void> clear() async {
     try {

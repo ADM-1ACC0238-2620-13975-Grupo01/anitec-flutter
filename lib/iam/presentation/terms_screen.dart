@@ -1,3 +1,5 @@
+// Documentation context: terms and conditions presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
@@ -11,6 +13,7 @@ class TermsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    // Define la lista de secciones de los términos y condiciones con sus respectivos títulos y cuerpos localizados, en orden de lectura.
     final sections = [
       (l10n.termsSectionUseTitle, l10n.termsSectionUseBody),
       (l10n.termsSectionAccountTitle, l10n.termsSectionAccountBody),

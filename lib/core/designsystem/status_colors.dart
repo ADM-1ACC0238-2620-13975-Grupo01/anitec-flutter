@@ -5,6 +5,7 @@ import 'colors.dart';
 /// Semantic severity of a status tag, equivalent to PrimeVue's Tag severities.
 enum Severity { success, warn, info, danger, neutral }
 
+/// Background and text color of a status tag.
 class StatusPalette {
   const StatusPalette(this.container, this.content);
 
@@ -25,6 +26,7 @@ class StatusColors extends ThemeExtension<StatusColors> {
     AniTecColors.brownDark,
   );
 
+  /// Palette of the given severity.
   StatusPalette of(Severity severity) => switch (severity) {
     Severity.success => _success,
     Severity.warn => _warn,
@@ -40,6 +42,7 @@ class StatusColors extends ThemeExtension<StatusColors> {
   StatusColors lerp(StatusColors? other, double t) => this;
 }
 
+/// Reads [StatusColors] from the theme, with the default colors as a fallback.
 extension StatusColorsTheme on ThemeData {
   StatusColors get statusColors =>
       extension<StatusColors>() ?? const StatusColors();

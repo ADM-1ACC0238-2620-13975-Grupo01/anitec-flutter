@@ -1,3 +1,5 @@
+// Feature context: animal health event domain data.
+
 /// A health record of one animal. Dates are ISO (`yyyy-MM-dd`).
 class HealthEvent {
   const HealthEvent({
@@ -21,11 +23,15 @@ class HealthEvent {
   final String type;
   final String date;
   final String description;
+
+  /// Name of the veterinarian who attended the animal.
   final String veterinarian;
   final String diagnosis;
   final String treatment;
   final String prescription;
   final String followUp;
+
+  /// Date of the next dose or check-up, if one is needed.
   final String? nextDueDate;
 
   /// Open events carry a next due date; the dashboard counts them as pending follow-ups.
@@ -41,6 +47,7 @@ abstract final class HealthTypes {
   static const checkup = 'Revision';
 }
 
+/// Client-side visibility rules for health records.
 abstract final class SanitaryScope {
   /// The API returns every record; a user only sees the ones of animals they can see.
   static List<HealthEvent> visibleEvents(

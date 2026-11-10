@@ -1,3 +1,5 @@
+// Feature context: remote sanitary record synchronization.
+
 import 'package:dio/dio.dart';
 
 import '../../core/network/app_error.dart';
@@ -5,6 +7,7 @@ import '../../core/network/json_reader.dart';
 import '../domain/health_event.dart';
 import '../domain/sanitary_repository.dart';
 
+/// [SanitaryRepository] backed by the `health-events` endpoint of the API.
 class SanitaryRepositoryImpl implements SanitaryRepository {
   const SanitaryRepositoryImpl(this._dio);
 
@@ -17,6 +20,7 @@ class SanitaryRepositoryImpl implements SanitaryRepository {
   });
 }
 
+/// Reads a health event; [HealthEvent.nextDueDate] stays null when the API omits it.
 HealthEvent _eventFromJson(Map<String, dynamic> json) => HealthEvent(
   id: json.intOf('id'),
   animalId: json.intOf('animalId'),

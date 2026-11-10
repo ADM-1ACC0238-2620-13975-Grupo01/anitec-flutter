@@ -1,3 +1,5 @@
+// Feature context: core livestock domain entities.
+
 import 'animal_status.dart';
 
 /// A farm (the web UI calls it "Finca"). It groups corrals and animals.
@@ -9,6 +11,7 @@ class Herd {
   final int ownerId;
 }
 
+/// An animal of a herd, with its health status.
 class Animal {
   const Animal({
     required this.id,
@@ -24,6 +27,7 @@ class Animal {
   final String status;
   final int herdId;
 
+  /// Status translated from the API text.
   AnimalStatus get healthStatus => AnimalStatus.fromApi(status);
 
   /// Archived animals are kept on the server but left out of the herd counters.

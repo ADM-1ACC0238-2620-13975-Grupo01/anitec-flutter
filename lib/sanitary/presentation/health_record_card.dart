@@ -1,3 +1,5 @@
+// Feature context: health record summary presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
@@ -24,9 +26,13 @@ class HealthRecordCard extends StatelessWidget {
     required this.animalName,
   });
 
+  /// Record to show.
   final HealthEvent event;
+  /// Name of the animal; the animal id is shown when empty.
   final String animalName;
-
+  /// Builds the UI representation for an individual health record card, displaying
+  /// animal identification, event dates, status tags, and conditionally included details
+  /// such as diagnosis, treatment, and follow-up schedules.
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -37,6 +43,7 @@ class HealthRecordCard extends StatelessWidget {
       trailing: event.hasFollowUp
           ? StatusTag(l10n.healthTagFollowUp, Severity.warn)
           : StatusTag(l10n.healthTagClosed, Severity.success),
+      // Optional fields are only listed when they have a value.
       details: [
         (l10n.healthType, healthTypeLabel(l10n, event.type)),
         (l10n.healthDescription, event.description),

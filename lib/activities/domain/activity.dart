@@ -1,3 +1,5 @@
+// Feature context: scheduled activity domain data.
+
 import '../../core/util/iso_date.dart';
 
 /// A scheduled farm task. `ownerId` is the rancher it concerns. Dates are ISO (`yyyy-MM-dd`);
@@ -21,6 +23,7 @@ class Activity {
   final String priority;
   final String status;
 
+  /// Whether the activity is completed, ignoring case.
   bool get isCompleted =>
       status.toLowerCase() == ActivityStatuses.completed.toLowerCase();
 
@@ -37,11 +40,12 @@ class Activity {
     final day = parseApiDay(date);
     return day != null && day.isBefore(_dayOf(today));
   }
-
+  /// Strips the time component from a [DateTime], returning a new instance set to midnight (00:00:00) of that day.
   static DateTime _dayOf(DateTime value) =>
       DateTime(value.year, value.month, value.day);
 }
 
+/// Activity types offered by the web; the API stores them as free text.
 abstract final class ActivityTypes {
   static const health = 'Sanitario';
   static const vetVisit = 'Visita veterinaria';
@@ -50,18 +54,21 @@ abstract final class ActivityTypes {
   static const reproductive = 'Reproductivo';
 }
 
+/// Priority values used by the web.
 abstract final class ActivityPriorities {
   static const high = 'Alta';
   static const medium = 'Media';
   static const low = 'Baja';
 }
 
+/// Status values used by the web.
 abstract final class ActivityStatuses {
   static const pending = 'Pendiente';
   static const scheduled = 'Programado';
   static const completed = 'Completado';
 }
 
+/// Client-side visibility rules for activities.
 abstract final class ActivityScope {
   /// The API returns every activity, so the client filters: a rancher sees the ones about them.
   static List<Activity> visibleToRancher(

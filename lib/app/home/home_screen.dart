@@ -1,3 +1,5 @@
+// Feature context: home screen layout and user interactions.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +22,8 @@ enum _MenuAction { terms, signOut }
 /// Rancher dashboard: farm filter, counters, upcoming activities and recent health records.
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
-
+  /// Builds the main screen UI containing the app bar with user actions, language selection,
+  /// and a refreshable dashboard body or placeholder depending on data availability.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
@@ -140,6 +143,7 @@ class _Placeholder extends StatelessWidget {
   }
 }
 
+/// Dashboard content once data is loaded. A failed refresh shows a banner over the last data.
 class _Dashboard extends StatelessWidget {
   const _Dashboard({
     required this.session,

@@ -1,3 +1,5 @@
+// Feature context: remote activity data access.
+
 import 'package:dio/dio.dart';
 
 import '../../core/network/app_error.dart';
@@ -5,6 +7,7 @@ import '../../core/network/json_reader.dart';
 import '../domain/activities_repository.dart';
 import '../domain/activity.dart';
 
+/// Reads farm activities from the API with the shared [Dio] client.
 class ActivitiesRepositoryImpl implements ActivitiesRepository {
   const ActivitiesRepositoryImpl(this._dio);
 
@@ -18,6 +21,7 @@ class ActivitiesRepositoryImpl implements ActivitiesRepository {
   });
 }
 
+/// Builds an [Activity] from one item of the `farm-events` response.
 Activity _activityFromJson(Map<String, dynamic> json) => Activity(
   id: json.intOf('id'),
   ownerId: json.intOrNull('ownerId'),

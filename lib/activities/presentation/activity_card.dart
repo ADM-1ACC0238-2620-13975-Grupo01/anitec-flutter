@@ -1,3 +1,5 @@
+// Feature context: scheduled activity card presentation.
+
 import 'package:flutter/material.dart';
 
 import '../../core/designsystem/components.dart';
@@ -18,6 +20,7 @@ String activityTypeLabel(AppLocalizations l10n, String type) => switch (type) {
   _ => type,
 };
 
+/// Localized priority; unknown values are shown as they are.
 String activityPriorityLabel(AppLocalizations l10n, String priority) =>
     switch (priority) {
       ActivityPriorities.high => l10n.activityPriorityHigh,
@@ -26,6 +29,7 @@ String activityPriorityLabel(AppLocalizations l10n, String priority) =>
       _ => priority,
     };
 
+/// Localized status; unknown values are shown as they are.
 String activityStatusLabel(AppLocalizations l10n, String status) =>
     switch (status) {
       ActivityStatuses.pending => l10n.activityStatusPending,
@@ -52,6 +56,7 @@ class ActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final date = displayApiDay(activity.date);
+    // Construye la tarjeta de registro con los detalles y la etiqueta de prioridad de la actividad.
     return RecordCard(
       title: activity.title,
       kicker: activity.isOverdue(today)

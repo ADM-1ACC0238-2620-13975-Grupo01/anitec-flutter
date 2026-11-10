@@ -66,7 +66,8 @@ abstract class AppLocalizations {
     : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
-
+  /// Retrieves the closest [AppLocalizations] instance instance from the given [BuildContext].
+  /// Throws an assertion error if localizations are not found in the widget tree.
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
